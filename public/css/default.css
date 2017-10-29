@@ -1,0 +1,14 @@
+body {
+    padding-top: 100px;
+}
+
+footer {
+    background-color: #151414;
+    padding: 20px 10px 14px 10px;
+    margin-top: 60px;
+}
+
+a.nav-link.dropdown-toggle img {
+    height: 22px !important;
+    padding-left: 5px !important;
+}

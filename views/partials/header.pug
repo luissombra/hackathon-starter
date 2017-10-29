@@ -1,42 +1,41 @@
-.navbar.navbar-default.navbar-fixed-top
-  .container
-    .navbar-header
-      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand(href='/')
-        i.fa.fa-cube
-        | Project name
-    .collapse.navbar-collapse
-      ul.nav.navbar-nav
-        li(class=(title === 'Home') ? 'active' : undefined)
-          a(href='/') Home
-        li(class=(title === 'API Examples') ? 'active' : undefined)
-          a(href='/api') API Examples
-        li(class=(title === 'Contact') ? 'active' : undefined)
-          a(href='/contact') Contact
-        li
-          a(href='/status') Status
-      ul.nav.navbar-nav.navbar-right
-        if !user
-          li(class=(title === 'Login') ? 'active' : undefined)
-            a(href='/login') Login
-          li(class=(title === 'Create Account') ? 'active' : undefined)
-            a(href='/signup') Create Account
+nav.navbar.navbar-expand-md.navbar-dark.bg-primary.fixed-top
+  a.navbar-brand(href='#') Projeto
+  button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+
+  div.collapse.navbar-collapse(id='navbarsExampleDefault')
+
+    ul.navbar-nav.mr-auto
+      li.nav-item(class=(title === 'Home') ? 'active' : undefined)
+        a.nav-link(href='/') Inicio
+      li.nav-item(class=(title === 'API Examples') ? 'active' : undefined)
+        a.nav-link(href='/api') Exemplos
+      li.nav-item(class=(title === 'Contact') ? 'active' : undefined)
+        a.nav-link(href='/contact') Contato
+      li.nav-item
+        a.nav-link(href='/status') Status
+        
+    form.form-inline.my-2.my-lg-0
+      input.form-control.mr-sm-2(type='text', placeholder='Pesquisar', aria-label='Pesquisar')
+      button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Ok
+
+    ul.navbar-nav
+      li.nav-item.dropdown
+
+        if user
+          a.nav-link.dropdown-toggle(href="#", id="navbarDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+            span=user.profile.name || user.email || user.id
+            if user.profile.picture
+              img(src=user.profile.picture)
+            else
+              img(src=user.gravatar(60))
+
+          div.dropdown-menu(aria-labelledby="navbarDropdown")
+            a.dropdown-item(href="/account") Minha Conta
+            a.dropdown-item(href="/logout") Sair
+
         else
-          li.dropdown(class=(title === 'Account Management') ? 'active' : undefined)
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
-              if user.profile.picture
-                img(src=user.profile.picture)
-              else
-                img(src=user.gravatar(60))
-              span= user.profile.name || user.email || user.id
-              i.caret
-            ul.dropdown-menu
-              li
-                a(href='/account') My Account
-              li.divider
-              li
-                a(href='/logout') Logout
+          a.nav-link.dropdown-toggle(href="#", id="navbarDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Conta
+          div.dropdown-menu(aria-labelledby="navbarDropdown")
+            a.dropdown-item(href="/login") Entrar
+            a.dropdown-item(href="/signup") Criar Conta

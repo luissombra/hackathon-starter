@@ -1,14 +1,11 @@
-FROM node:6-slim
+FROM node:8-alpine
 
-COPY . /starter
-COPY package.json /starter/package.json
-COPY .env.example /starter/.env.example
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+ADD package.json package-lock.json .env.example ./
+RUN yarn --pure-lockfile
+ADD . .
 
-WORKDIR /starter
+EXPOSE 3000
 
-ENV NODE_ENV production
-RUN npm install --production
-
-CMD ["npm","start"]
-
-EXPOSE 8888
+CMD ["npm", "start"]
